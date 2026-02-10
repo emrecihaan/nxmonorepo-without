@@ -1,0 +1,76 @@
+<div class="layout-wrapper" [class.sidebar-collapsed]="sidebarCollapsed" [class.dark-theme]="isDarkTheme">
+  <lib-toast></lib-toast>
+
+  <!-- Sidebar -->
+  <aside class="layout-sidebar">
+    <div class="sidebar-header">
+      <div class="brand">
+        <i class="pi pi-bolt brand-icon"></i>
+        <span class="brand-text" *ngIf="!sidebarCollapsed">ADMIN PANEL</span>
+      </div>
+    </div>
+
+    <div class="sidebar-content">
+      <lib-menu [collapsed]="sidebarCollapsed"></lib-menu>
+    </div>
+
+    <div class="sidebar-footer" *ngIf="!sidebarCollapsed">
+      <div class="user-card">
+        <div class="user-avatar-circle">AD</div>
+        <div class="user-info">
+          <span class="user-name">Admin User</span>
+          <span class="user-role">Administrator</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="layout-main">
+    <!-- Topbar -->
+    <header class="layout-topbar">
+      <div class="topbar-left">
+        <button type="button" class="toggle-btn btn-text" (click)="toggleSidebar()">
+          <i class="pi pi-bars"></i>
+        </button>
+        <div class="breadcrumb" *ngIf="!sidebarCollapsed">
+          <span class="breadcrumb-item">Dashboard</span>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <!-- Theme Toggle -->
+        <button type="button" class="action-btn btn-text" (click)="toggleTheme()">
+          <i [class]="isDarkTheme ? 'pi pi-sun' : 'pi pi-moon'"></i>
+        </button>
+
+        <!-- Language Switcher -->
+        <div class="lang-switcher">
+          <button type="button" [class.active]="currentLang === 'tr'" class="lang-btn btn-text"
+            (click)="switchLanguage('tr')">TR</button>
+          <button type="button" [class.active]="currentLang === 'en'" class="lang-btn btn-text"
+            (click)="switchLanguage('en')">EN</button>
+        </div>
+
+        <!-- Notifications -->
+        <button type="button" class="action-btn btn-text pos-relative">
+          <i class="pi pi-bell"></i>
+          <span class="custom-badge">3</span>
+        </button>
+
+        <!-- Profile -->
+        <div class="profile-item">
+          <div class="profile-avatar-circle">U</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="layout-content">
+      <router-outlet></router-outlet>
+    </main>
+
+    <footer class="layout-footer">
+      <span>&copy; 2026 Admin Panel. All rights reserved.</span>
+    </footer>
+  </div>
+</div>
