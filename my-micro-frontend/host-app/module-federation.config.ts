@@ -14,15 +14,24 @@ const config: ModuleFederationConfig = {
       libraryName.startsWith('rxjs') ||
       libraryName === 'zone.js' ||
       libraryName === 'tslib' ||
-      libraryName === '@ngx-translate/core';
+      libraryName === '@ngx-translate/core' ||
+      libraryName === 'primeng' ||
+      libraryName.startsWith('primeng/') ||
+      libraryName === '@primeng/themes' ||
+      libraryName.startsWith('@primeng/themes/');
 
     if (isShared) {
+      // Core Angular packages must be eager to avoid loadShareSync errors
+      const isEager = libraryName.startsWith('@angular/') ||
+        libraryName === 'zone.js' ||
+        libraryName.startsWith('rxjs');
+
       return {
         ...sharedConfig,
         singleton: true,
-        strictVersion: false,   // Versiyon farkı olsa da çalışma
-        requiredVersion: false, // Belirli sürüm dayatmasını kaldır
-        eager: false
+        strictVersion: false,
+        requiredVersion: false,
+        eager: isEager  // Critical packages loaded eagerly
       };
     }
     return sharedConfig;

@@ -29,9 +29,8 @@
     <!-- Topbar -->
     <header class="layout-topbar">
       <div class="topbar-left">
-        <button type="button" class="toggle-btn btn-text" (click)="toggleSidebar()">
-          <i class="pi pi-bars"></i>
-        </button>
+        <p-button icon="pi pi-bars" [text]="true" [rounded]="true" (onClick)="toggleSidebar()"
+          severity="secondary"></p-button>
         <div class="breadcrumb" *ngIf="!sidebarCollapsed">
           <span class="breadcrumb-item">Dashboard</span>
         </div>
@@ -39,23 +38,20 @@
 
       <div class="topbar-right">
         <!-- Theme Toggle -->
-        <button type="button" class="action-btn btn-text" (click)="toggleTheme()">
-          <i [class]="isDarkTheme ? 'pi pi-sun' : 'pi pi-moon'"></i>
-        </button>
+        <p-button [icon]="isDarkTheme ? 'pi pi-sun' : 'pi pi-moon'" [text]="true" [rounded]="true"
+          (onClick)="toggleTheme()" severity="secondary"></p-button>
 
         <!-- Language Switcher -->
         <div class="lang-switcher">
-          <button type="button" [class.active]="currentLang === 'tr'" class="lang-btn btn-text"
-            (click)="switchLanguage('tr')">TR</button>
-          <button type="button" [class.active]="currentLang === 'en'" class="lang-btn btn-text"
-            (click)="switchLanguage('en')">EN</button>
+          <p-button label="TR" [text]="true" [rounded]="true" (onClick)="switchLanguage('tr')"
+            [severity]="currentLang === 'tr' ? 'info' : 'secondary'" [class.active]="currentLang === 'tr'"></p-button>
+          <p-button label="EN" [text]="true" [rounded]="true" (onClick)="switchLanguage('en')"
+            [severity]="currentLang === 'en' ? 'info' : 'secondary'" [class.active]="currentLang === 'en'"></p-button>
         </div>
 
         <!-- Notifications -->
-        <button type="button" class="action-btn btn-text pos-relative">
-          <i class="pi pi-bell"></i>
-          <span class="custom-badge">3</span>
-        </button>
+        <p-button icon="pi pi-bell" [text]="true" [rounded]="true" severity="secondary" badge="3"
+          badgeSeverity="danger"></p-button>
 
         <!-- Profile -->
         <div class="profile-item">

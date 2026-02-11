@@ -7,52 +7,49 @@
             <div class="card-header">
                 <div>
                     <h3 class="card-title">{{ 'USER.TITLE' | translate }}</h3>
-                    <p class="card-subtitle">Kullanıcı bilgilerini girin</p>
+                    <p class="card-subtitle">{{ 'USER.FORM.FORM_SUBTITLE' | translate }}</p>
                 </div>
-                <button class="btn-text btn-rounded" (click)="resetForm()" title="Formu Temizle">
-                    <i class="pi pi-refresh"></i>
-                </button>
+                <p-button icon="pi pi-refresh" [rounded]="true" [text]="true" (click)="resetForm()"
+                    severity="secondary"></p-button>
             </div>
 
             <div class="form-grid">
                 <div class="form-field">
-                    <label for="name">Ad Soyad *</label>
-                    <input id="name" type="text" [(ngModel)]="newUser.name" placeholder="Örn: Ahmet User"
-                        class="w-full custom-input">
+                    <p-floatlabel variant="on">
+                        <input pInputText id="name" type="text" [(ngModel)]="newUser.name" class="w-full" />
+                        <label for="name">{{ 'USER.FORM.NAME_LABEL' | translate }} *</label>
+                    </p-floatlabel>
                 </div>
 
                 <div class="form-field">
-                    <label for="email">Email *</label>
-                    <input id="email" type="email" [(ngModel)]="newUser.email" placeholder="ornek@sirket.com"
-                        class="w-full custom-input">
+                    <p-floatlabel variant="on">
+                        <input pInputText id="email" type="email" [(ngModel)]="newUser.email" class="w-full" />
+                        <label for="email">{{ 'USER.FORM.EMAIL_LABEL' | translate }} *</label>
+                    </p-floatlabel>
                 </div>
 
                 <div class="form-field">
-                    <label for="role">Rol *</label>
-                    <select id="role" [(ngModel)]="newUser.role" class="w-full custom-select">
-                        <option value="" disabled selected>Rol Seçin</option>
-                        <option *ngFor="let role of roles" [value]="role.value">{{ role.label }}</option>
-                    </select>
+                    <p-floatlabel variant="on">
+                        <p-select id="role" [options]="roles" [(ngModel)]="newUser.role" optionLabel="label"
+                            optionValue="value" class="w-full" [fluid]="true"></p-select>
+                        <label for="role">{{ 'USER.FORM.ROLE_LABEL' | translate }} *</label>
+                    </p-floatlabel>
                 </div>
 
                 <div class="form-field">
-                    <label for="department">Departman *</label>
-                    <select id="department" [(ngModel)]="newUser.department" class="w-full custom-select">
-                        <option value="" disabled selected>Departman Seçin</option>
-                        <option *ngFor="let dept of departments" [value]="dept.value">{{ dept.label }}</option>
-                    </select>
+                    <p-floatlabel variant="on">
+                        <p-select id="department" [options]="departments" [(ngModel)]="newUser.department"
+                            optionLabel="label" optionValue="value" class="w-full" [fluid]="true"></p-select>
+                        <label for="department">{{ 'USER.FORM.DEPARTMENT_LABEL' | translate }} *</label>
+                    </p-floatlabel>
                 </div>
             </div>
 
             <div class="form-actions">
-                <button class="btn btn-secondary" (click)="resetForm()">
-                    <i class="pi pi-times"></i>
-                    <span>Temizle</span>
-                </button>
-                <button class="btn btn-success" (click)="addUser()">
-                    <i class="pi pi-plus"></i>
-                    <span>Kullanıcı Ekle</span>
-                </button>
+                <p-button [label]="'USER.FORM.CLEAR_BUTTON' | translate" icon="pi pi-times" severity="secondary"
+                    (click)="resetForm()"></p-button>
+                <p-button [label]="'USER.FORM.ADD_BUTTON' | translate" icon="pi pi-plus" severity="success"
+                    (click)="addUser()"></p-button>
             </div>
         </div>
     </div>
@@ -62,72 +59,67 @@
         <div class="table-card card">
             <div class="card-header">
                 <div>
-                    <h3 class="card-title">Kullanıcı Listesi</h3>
-                    <p class="card-subtitle">Toplam {{ users.length }} kullanıcı</p>
+                    <h3 class="card-title">{{ 'USER.TABLE.TITLE' | translate }}</h3>
+                    <p class="card-subtitle">{{ 'USER.TABLE.SUBTITLE' | translate:{count: users.length} }}</p>
                 </div>
-                <button class="btn btn-outlined-blue">
-                    <i class="pi pi-download"></i>
-                    <span>Export</span>
-                </button>
+                <p-button [label]="'USER.TABLE.EXPORT_BUTTON' | translate" icon="pi pi-download" [outlined]="true"
+                    severity="info"></p-button>
             </div>
 
-            <div class="table-responsive">
-                <table class="custom-table">
-                    <thead>
-                        <tr>
-                            <th style="width: 5%">ID</th>
-                            <th style="width: 20%">AD SOYAD</th>
-                            <th style="width: 20%">EMAIL</th>
-                            <th style="width: 10%">ROL</th>
-                            <th style="width: 15%">DEPARTMAN</th>
-                            <th style="width: 10%">DURUM</th>
-                            <th style="width: 10%">KATILMA TARİHİ</th>
-                            <th style="width: 10%">İŞLEMLER</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let user of users">
-                            <td><strong>#{{ user.id }}</strong></td>
-                            <td>
-                                <div class="user-cell">
-                                    <div class="user-avatar">
-                                        {{ user.name.charAt(0) }}
-                                    </div>
-                                    <span>{{ user.name }}</span>
-                                </div>
-                            </td>
-                            <td>{{ user.email }}</td>
-                            <td>
-                                <span class="role-badge">{{ getRoleLabel(user.role) }}</span>
-                            </td>
-                            <td>{{ getDepartmentLabel(user.department) }}</td>
-                            <td>
-                                <span class="status-aktif" *ngIf="user.status === 'active'">Aktif</span>
-                                <span class="status-pasif" *ngIf="user.status !== 'active'">Pasif</span>
-                            </td>
-                            <td>{{ user.joinDate }}</td>
-                            <td>
-                                <div class="action-buttons">
-                                    <button class="btn-icon edit" title="Düzenle">
-                                        <i class="pi pi-pencil"></i>
-                                    </button>
-                                    <button class="btn-icon delete" title="Sil" (click)="deleteUser(user)">
-                                        <i class="pi pi-trash"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr *ngIf="users.length === 0">
-                            <td colspan="8" class="empty-message">
-                                <div class="empty-state">
-                                    <i class="pi pi-users empty-icon"></i>
-                                    <p>Henüz kullanıcı eklenmemiş</p>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <p-table [value]="users" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-sm">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 5%">{{ 'USER.TABLE.COLUMNS.ID' | translate }}</th>
+                        <th style="width: 20%">{{ 'USER.TABLE.COLUMNS.NAME' | translate }}</th>
+                        <th style="width: 20%">{{ 'USER.TABLE.COLUMNS.EMAIL' | translate }}</th>
+                        <th style="width: 10%">{{ 'USER.TABLE.COLUMNS.ROLE' | translate }}</th>
+                        <th style="width: 15%">{{ 'USER.TABLE.COLUMNS.DEPARTMENT' | translate }}</th>
+                        <th style="width: 10%">{{ 'USER.TABLE.COLUMNS.STATUS' | translate }}</th>
+                        <th style="width: 10%">{{ 'USER.TABLE.COLUMNS.JOIN_DATE' | translate }}</th>
+                        <th style="width: 10%">{{ 'USER.TABLE.COLUMNS.ACTIONS' | translate }}</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-user>
+                    <tr>
+                        <td><strong>#{{ user.id }}</strong></td>
+                        <td>
+                            <div class="user-cell">
+                                <div class="user-avatar">{{ user.name.charAt(0) }}</div>
+                                <span>{{ user.name }}</span>
+                            </div>
+                        </td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            <span class="role-badge">{{ getRoleLabel(user.role) }}</span>
+                        </td>
+                        <td>{{ getDepartmentLabel(user.department) }}</td>
+                        <td>
+                            <span class="status-aktif" *ngIf="user.status === 'active'">{{ 'USER.TABLE.STATUS.ACTIVE' |
+                                translate }}</span>
+                            <span class="status-pasif" *ngIf="user.status !== 'active'">{{ 'USER.TABLE.STATUS.INACTIVE'
+                                | translate }}</span>
+                        </td>
+                        <td>{{ user.joinDate }}</td>
+                        <td>
+                            <div class="action-buttons">
+                                <p-button icon="pi pi-pencil" [text]="true" [rounded]="true" severity="info"></p-button>
+                                <p-button icon="pi pi-trash" [text]="true" [rounded]="true" severity="danger"
+                                    (onClick)="deleteUser(user)"></p-button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="8" class="empty-message">
+                            <div class="empty-state">
+                                <i class="pi pi-users empty-icon"></i>
+                                <p>{{ 'USER.TABLE.EMPTY_MESSAGE' | translate }}</p>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
         </div>
     </div>
 </div>

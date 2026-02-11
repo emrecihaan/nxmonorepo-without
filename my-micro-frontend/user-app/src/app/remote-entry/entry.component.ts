@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { SelectModule } from 'primeng/select';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { TableModule } from 'primeng/table';
 
 interface User {
   id: number;
@@ -29,7 +34,12 @@ interface Department {
   imports: [
     CommonModule,
     FormsModule,
-    TranslateModule
+    TranslateModule,
+    ButtonModule,
+    InputTextModule,
+    SelectModule,
+    FloatLabelModule,
+    TableModule
   ],
   templateUrl: './entry.component.html',
   styleUrl: './entry.component.scss'
@@ -63,7 +73,11 @@ export class RemoteEntryComponent implements OnInit {
     { label: 'Finance', value: 'finance' }
   ];
 
-  constructor() { }
+  constructor(private translate: TranslateService) {
+    // Manually initialize translation for micro-frontend
+    this.translate.setDefaultLang('tr');
+    this.translate.use('tr');
+  }
 
 
 

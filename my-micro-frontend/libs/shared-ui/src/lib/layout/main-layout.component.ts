@@ -4,11 +4,12 @@ import { RouterModule } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ToastComponent } from '../toast/toast.component';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'lib-main-layout',
   standalone: true,
-  imports: [CommonModule, RouterModule, MenuComponent, TranslateModule, ToastComponent],
+  imports: [CommonModule, RouterModule, MenuComponent, TranslateModule, ToastComponent, ButtonModule],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss'
 })

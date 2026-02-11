@@ -15,8 +15,11 @@
     "@ngx-translate/core": "^17.0.0",
     "@ngx-translate/http-loader": "^17.0.0",
     "@nx/angular": "^22.4.2",
+    "@primeng/themes": "^21.0.4",
     "chart.js": "^4.5.1",
     "empty": "0.10.1",
+    "primeicons": "^7.0.0",
+    "primeng": "^21.0.4",
     "rxjs": "~7.8.0",
     "zone.js": "^0.16.0"
   },
