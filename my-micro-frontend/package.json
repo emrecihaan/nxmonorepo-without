@@ -17,6 +17,8 @@
     "@nx/angular": "^22.4.2",
     "@primeng/themes": "^21.0.4",
     "chart.js": "^4.5.1",
+    "devextreme": "25.1.8",
+    "devextreme-angular": "25.1.8",
     "empty": "0.10.1",
     "primeicons": "^7.0.0",
     "primeng": "^21.0.4",

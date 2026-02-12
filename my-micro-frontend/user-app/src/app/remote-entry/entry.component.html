@@ -54,6 +54,27 @@
         </div>
     </div>
 
+    <!-- DevExtreme DataGrid -->
+    <div class="table-section animate-fade-in" style="margin-bottom: 2rem;">
+        <div class="card">
+            <h3 class="card-title">DevExtreme DataGrid</h3>
+            <dx-data-grid [dataSource]="users" [showBorders]="true">
+                <dxo-paging [pageSize]="5"></dxo-paging>
+                <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]"></dxo-pager>
+                <dxo-filter-row [visible]="true"></dxo-filter-row>
+                <dxo-search-panel [visible]="true"></dxo-search-panel>
+
+                <dxi-column dataField="id" caption="ID" [width]="70"></dxi-column>
+                <dxi-column dataField="name" caption="Name"></dxi-column>
+                <dxi-column dataField="email" caption="Email"></dxi-column>
+                <dxi-column dataField="role" caption="Role"></dxi-column>
+                <dxi-column dataField="department" caption="Department"></dxi-column>
+                <dxi-column dataField="status" caption="Status"></dxi-column>
+                <dxi-column dataField="joinDate" caption="Join Date" dataType="date"></dxi-column>
+            </dx-data-grid>
+        </div>
+    </div>
+
     <!-- Users Table -->
     <div class="table-section animate-fade-in">
         <div class="table-card card">

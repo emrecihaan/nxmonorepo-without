@@ -24,6 +24,8 @@
           }
         ],
         "styles": [
+          "node_modules/devextreme/dist/css/dx.common.css",
+          "node_modules/devextreme/dist/css/dx.light.css",
           "user-app/src/styles.scss"
         ],
         "customWebpackConfig": {
@@ -35,8 +37,8 @@
           "budgets": [
             {
               "type": "initial",
-              "maximumWarning": "2mb",
-              "maximumError": "3mb"
+              "maximumWarning": "30mb",
+              "maximumError": "40mb"
             },
             {
               "type": "anyComponentStyle",

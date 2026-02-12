@@ -18,13 +18,21 @@ const config: ModuleFederationConfig = {
       libraryName === 'primeng' ||
       libraryName.startsWith('primeng/') ||
       libraryName === '@primeng/themes' ||
-      libraryName.startsWith('@primeng/themes/');
+      libraryName.startsWith('@primeng/themes/') ||
+      libraryName === 'devextreme' ||
+      libraryName.startsWith('devextreme/') ||
+      libraryName === 'devextreme-angular' ||
+      libraryName.startsWith('devextreme-angular/');
 
     if (isShared) {
       // Core Angular packages must be eager to avoid loadShareSync errors
       const isEager = libraryName.startsWith('@angular/') ||
         libraryName === 'zone.js' ||
-        libraryName.startsWith('rxjs');
+        libraryName.startsWith('rxjs') ||
+        libraryName === 'devextreme' ||
+        libraryName.startsWith('devextreme/') ||
+        libraryName === 'devextreme-angular' ||
+        libraryName.startsWith('devextreme-angular/');
 
       return {
         ...sharedConfig,

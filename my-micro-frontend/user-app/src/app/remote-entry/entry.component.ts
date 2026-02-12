@@ -7,6 +7,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { TableModule } from 'primeng/table';
+import { DxDataGridModule } from 'devextreme-angular';
 
 interface User {
   id: number;
@@ -39,7 +40,9 @@ interface Department {
     InputTextModule,
     SelectModule,
     FloatLabelModule,
-    TableModule
+    FloatLabelModule,
+    TableModule,
+    DxDataGridModule
   ],
   templateUrl: './entry.component.html',
   styleUrl: './entry.component.scss'
